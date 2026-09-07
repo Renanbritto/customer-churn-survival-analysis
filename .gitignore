@@ -1,0 +1,17 @@
+# R History & Workspace
+.Rhistory
+.Rdata
+.Ruserdata
+.Rproj.user/
+*.Rproj
+
+# Packages & Builds
+*.tar.gz
+*.Rcheck/
+.Rbuildignore
+
+# Environment & OS
+.DS_Store
+Thumbs.db
+.env
+.venv/
