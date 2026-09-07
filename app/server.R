@@ -106,7 +106,7 @@ server <- function(input, output, session) {
       ),
       tags$div(
         style = "background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 12px; font-size: 0.86rem; color: #a7f3d0;",
-        "✅ ", lr$interpretation
+        "", lr$interpretation
       )
     )
   })
@@ -278,7 +278,7 @@ server <- function(input, output, session) {
       tagList(
         tags$div(
           style = "background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 10px; padding: 18px;",
-          tags$h6(style = "color: #f87171; font-weight: 700;", "🚨 Perfil Crítico de Churn Iminente!"),
+          tags$h6(style = "color: #f87171; font-weight: 700;", "Perfil Crítico de Churn Iminente!"),
           tags$p(style = "color: #fecaca; margin-bottom: 0;",
                  "Cliente em contrato mensal com múltiplos chamados abertos no suporte técnico. ",
                  "O risco acumulado indica sobrevida média de apenas ", tags$b(paste(lifetime, "meses.")),
@@ -289,7 +289,7 @@ server <- function(input, output, session) {
       tagList(
         tags$div(
           style = "background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 10px; padding: 18px;",
-          tags$h6(style = "color: #34d399; font-weight: 700;", "🌟 Cliente Campeão de Retenção (High LTV)"),
+          tags$h6(style = "color: #34d399; font-weight: 700;", "Cliente Campeão de Retenção (High LTV)"),
           tags$p(style = "color: #a7f3d0; margin-bottom: 0;",
                  "O contrato de dois anos atua como forte barreira protetiva contra cancelamento (Hazard Ratio < 0.40). ",
                  "Expectativa de LTV residual de ", tags$b(paste0("R$ ", format(res$ltv$discounted_ltv, big.mark = ".", decimal.mark = ","))),
@@ -300,7 +300,7 @@ server <- function(input, output, session) {
       tagList(
         tags$div(
           style = "background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 10px; padding: 18px;",
-          tags$h6(style = "color: #38bdf8; font-weight: 700;", "ℹ️ Perfil Moderado"),
+          tags$h6(style = "color: #38bdf8; font-weight: 700;", "Perfil Moderado"),
           tags$p(style = "color: #bae6fd; margin-bottom: 0;",
                  "Risco dentro da média esperada da safra. Recomenda-se incentivar o cadastro de débito automático ou cartão de crédito para reduzir a fricção de pagamento por boleto/cheque eletrônico.")
         )

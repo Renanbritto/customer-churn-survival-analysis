@@ -1,4 +1,4 @@
-# ⏱️ Customer Churn Survival Analysis & LTV Modeling in R
+# ️ Customer Churn Survival Analysis & LTV Modeling in R
 
 [![R Statistical Quality & Test Pipeline](https://github.com/Renanbritto/customer-churn-survival-analysis/actions/workflows/r-ci.yml/badge.svg)](https://github.com/Renanbritto/customer-churn-survival-analysis/actions/workflows/r-ci.yml)
 [![R Version](https://img.shields.io/badge/R-%3E%3D%204.2.0-blue.svg)](https://www.r-project.org/)
@@ -11,7 +11,7 @@ Pipeline estatístico avançado desenvolvido em **R** para **Análise de Sobrevi
 
 ---
 
-## 🎯 Por que Análise de Sobrevivência em vez de Classificação Tradicional?
+##  Por que Análise de Sobrevivência em vez de Classificação Tradicional?
 
 Na maioria das empresas, o churn é modelado através de classificadores binários padrão (como Regressão Logística, Random Forest ou XGBoost). Embora populares, esses modelos sofrem de **duas falhas metodológicas críticas**:
 
@@ -22,7 +22,7 @@ A **Análise de Sobrevivência** resolve ambos os problemas ao modelar a distrib
 
 ---
 
-## 🔬 Fundamentação Matemática & Estatística
+##  Fundamentação Matemática & Estatística
 
 ### 1. Função de Sobrevivência e Estimador de Kaplan-Meier
 A função de sobrevivência representa a probabilidade de um cliente permanecer ativo além do tempo $t$:
@@ -76,7 +76,7 @@ $$\text{LTV}_{\text{descontado}} = \sum_{t=1}^{\tau} \frac{M \cdot S(t | X)}{(1 
 
 ---
 
-## 🏛️ Arquitetura da Solução
+## ️ Arquitetura da Solução
 
 ```mermaid
 flowchart TD
@@ -100,16 +100,16 @@ flowchart TD
     J --> K
     
     subgraph UI ["Interface Executiva R Shiny (bslib Darkly)"]
-        K --> T1["📈 Curvas de Kaplan-Meier & Marcos de Retenção"]
-        K --> T2["⚖️ Tabela e Forest Plot de Hazard Ratios"]
-        K --> T3["🎛️ Simulador What-If de Perfil e LTV Projetado"]
-        K --> T4["📊 Tabela de Dados & Exportação CSV"]
+        K --> T1[" Curvas de Kaplan-Meier & Marcos de Retenção"]
+        K --> T2["️ Tabela e Forest Plot de Hazard Ratios"]
+        K --> T3["️ Simulador What-If de Perfil e LTV Projetado"]
+        K --> T4[" Tabela de Dados & Exportação CSV"]
     end
 ```
 
 ---
 
-## 💻 Stack Tecnológica
+##  Stack Tecnológica
 
 | Camada | Pacote R | Finalidade |
 |---|---|---|
@@ -123,7 +123,7 @@ flowchart TD
 
 ---
 
-## 📂 Estrutura do Repositório
+##  Estrutura do Repositório
 
 ```
 customer-churn-survival-analysis/
@@ -156,7 +156,7 @@ customer-churn-survival-analysis/
 
 ---
 
-## 🚀 Como Executar Localmente
+##  Como Executar Localmente
 
 ### Pré-requisitos
 Certifique-se de possuir o [R (>= 4.2.0)](https://cran.r-project.org/) instalado em seu sistema (ou utilize o RStudio / Positron).
@@ -193,7 +193,7 @@ O aplicativo será iniciado localmente (geralmente em `http://127.0.0.1:port`), 
 
 ---
 
-## 🛡️ Licença
+## ️ Licença
 
 Distribuído sob a licença MIT.
 

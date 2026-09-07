@@ -22,7 +22,7 @@ ui <- bslib::page_navbar(
   theme = theme_executive,
   title = shiny::div(
     style = "display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem;",
-    shiny::tags$span(style = "font-size: 1.4rem;", "⏱️"),
+    
     shiny::tags$span(
       style = "background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;",
       "Customer Churn Survival Analytics"
@@ -222,7 +222,7 @@ ui <- bslib::page_navbar(
   sidebar = bslib::sidebar(
     title = shiny::div(
       class = "sidebar-title",
-      "🎛️ Perfil do Cliente"
+      "Perfil do Cliente"
     ),
     width = 320,
     open = "open",
@@ -292,7 +292,7 @@ ui <- bslib::page_navbar(
     
     shiny::tags$div(
       style = "background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 10px 12px; font-size: 0.8rem; color: #94a3b8;",
-      "💡 ", shiny::tags$b("Metodologia:"), " Riscos Proporcionais de Cox com taxa de desconto intertemporal de 0.8% a.m."
+      shiny::tags$b("Metodologia:"), " Riscos Proporcionais de Cox com taxa de desconto intertemporal de 0.8% a.m."
     )
   ),
   
@@ -300,7 +300,7 @@ ui <- bslib::page_navbar(
   # ABA 1: KAPLAN-MEIER & RETENÇÃO
   # ============================================================================
   bslib::nav_panel(
-    title = "📈 Kaplan-Meier & Retenção",
+    title = "Kaplan-Meier & Retenção",
     
     # 4 Cards Executivos com Layout Elegante
     shiny::fluidRow(
@@ -310,9 +310,7 @@ ui <- bslib::page_navbar(
           class = "kpi-card kpi-card-glow-blue",
           shiny::div(
             class = "kpi-label",
-            "Base Monitorada",
-            shiny::div(class = "kpi-icon-badge", style = "background: rgba(56, 189, 248, 0.15); color: #38bdf8;", "👥")
-          ),
+            "Base Monitorada"),
           shiny::div(class = "kpi-value", shiny::textOutput("kpi_total_customers")),
           shiny::div(class = "kpi-subtext", "Total de clientes sob observação")
         )
@@ -323,9 +321,7 @@ ui <- bslib::page_navbar(
           class = "kpi-card kpi-card-glow-red",
           shiny::div(
             class = "kpi-label",
-            "Eventos de Churn",
-            shiny::div(class = "kpi-icon-badge", style = "background: rgba(239, 68, 68, 0.15); color: #ef4444;", "❌")
-          ),
+            "Eventos de Churn"),
           shiny::div(class = "kpi-value", shiny::textOutput("kpi_churn_count")),
           shiny::div(class = "kpi-subtext", shiny::textOutput("kpi_churn_pct"))
         )
@@ -336,9 +332,7 @@ ui <- bslib::page_navbar(
           class = "kpi-card kpi-card-glow-green",
           shiny::div(
             class = "kpi-label",
-            "Clientes Ativos (Censurados)",
-            shiny::div(class = "kpi-icon-badge", style = "background: rgba(16, 185, 129, 0.15); color: #10b981;", "🛡️")
-          ),
+            "Clientes Ativos (Censurados)"),
           shiny::div(class = "kpi-value", shiny::textOutput("kpi_censored_count")),
           shiny::div(class = "kpi-subtext", shiny::textOutput("kpi_censored_pct"))
         )
@@ -349,9 +343,7 @@ ui <- bslib::page_navbar(
           class = "kpi-card kpi-card-glow-amber",
           shiny::div(
             class = "kpi-label",
-            "Mediana de Sobrevivência",
-            shiny::div(class = "kpi-icon-badge", style = "background: rgba(245, 158, 11, 0.15); color: #f59e0b;", "📅")
-          ),
+            "Mediana de Sobrevivência"),
           shiny::div(class = "kpi-value", shiny::textOutput("kpi_median_tenure")),
           shiny::div(class = "kpi-subtext", "Tempo em que 50% ainda retém")
         )
@@ -394,7 +386,7 @@ ui <- bslib::page_navbar(
           width = 5,
           shiny::div(
             style = "background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 18px;",
-            shiny::h5(style = "color: #38bdf8; font-weight: 700; margin-bottom: 14px;", "⚖️ Diagnóstico do Teste de Log-Rank"),
+            shiny::h5(style = "color: #38bdf8; font-weight: 700; margin-bottom: 14px;", "Diagnóstico do Teste de Log-Rank"),
             shiny::uiOutput("logrank_diagnostic_ui")
           )
         )
@@ -406,7 +398,7 @@ ui <- bslib::page_navbar(
   # ABA 2: MODELO DE COX & HAZARD RATIOS
   # ============================================================================
   bslib::nav_panel(
-    title = "⚖️ Modelo de Cox & Hazard Ratios",
+    title = "Modelo de Cox & Hazard Ratios",
     
     shiny::fluidRow(
       shiny::column(
@@ -440,7 +432,7 @@ ui <- bslib::page_navbar(
           width = 5,
           shiny::div(
             style = "background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 18px;",
-            shiny::h5(style = "color: #818cf8; font-weight: 700; margin-bottom: 12px;", "🔬 Avaliação Metodológica"),
+            shiny::h5(style = "color: #818cf8; font-weight: 700; margin-bottom: 12px;", "Avaliação Metodológica"),
             shiny::uiOutput("schoenfeld_diagnostic_ui")
           )
         )
@@ -452,14 +444,14 @@ ui <- bslib::page_navbar(
   # ABA 3: SIMULADOR WHAT-IF & LTV
   # ============================================================================
   bslib::nav_panel(
-    title = "🎛️ Simulador What-If & LTV",
+    title = "Simulador What-If & LTV",
     
     shiny::fluidRow(
       shiny::column(
         width = 4,
         shiny::div(
           class = "kpi-card kpi-card-glow-blue",
-          shiny::div(class = "kpi-label", "Sobrevida Média Esperada", shiny::div(class = "kpi-icon-badge", "⏳")),
+          shiny::div(class = "kpi-label", "Sobrevida Média Esperada"),
           shiny::div(class = "kpi-value", shiny::textOutput("kpi_sim_lifetime")),
           shiny::div(class = "kpi-subtext", "Meses projetados de vida útil")
         )
@@ -468,7 +460,7 @@ ui <- bslib::page_navbar(
         width = 4,
         shiny::div(
           class = "kpi-card kpi-card-glow-green",
-          shiny::div(class = "kpi-label", "Retenção em 12 Meses", shiny::div(class = "kpi-icon-badge", "🎯")),
+          shiny::div(class = "kpi-label", "Retenção em 12 Meses"),
           shiny::div(class = "kpi-value", shiny::textOutput("kpi_sim_prob12")),
           shiny::div(class = "kpi-subtext", "Probabilidade acumulada P(T > 12)")
         )
@@ -477,7 +469,7 @@ ui <- bslib::page_navbar(
         width = 4,
         shiny::div(
           class = "kpi-card kpi-card-glow-amber",
-          shiny::div(class = "kpi-label", "LTV Residual Descontado", shiny::div(class = "kpi-icon-badge", "💰")),
+          shiny::div(class = "kpi-label", "LTV Residual Descontado"),
           shiny::div(class = "kpi-value", shiny::textOutput("kpi_sim_ltv")),
           shiny::div(class = "kpi-subtext", "Valor presente líquido da receita futura")
         )
@@ -517,7 +509,7 @@ ui <- bslib::page_navbar(
   # ABA 4: BASE DE DADOS & EXPORTAÇÃO
   # ============================================================================
   bslib::nav_panel(
-    title = "📊 Base de Dados & Exportação",
+    title = "Base de Dados & Exportação",
     bslib::card(
       bslib::card_header("Base de Dados Completa (2.500 Clientes)"),
       DT::dataTableOutput("table_raw_data"),
@@ -525,11 +517,11 @@ ui <- bslib::page_navbar(
         shiny::fluidRow(
           shiny::column(
             width = 6,
-            shiny::downloadButton("download_raw_csv", "📥 Exportar Base Completa (CSV)", class = "btn btn-outline-info")
+            shiny::downloadButton("download_raw_csv", "Exportar Base Completa (CSV)", class = "btn btn-outline-info")
           ),
           shiny::column(
             width = 6,
-            shiny::downloadButton("download_cox_csv", "📥 Exportar Tabela de Hazard Ratios (CSV)", class = "btn btn-outline-secondary")
+            shiny::downloadButton("download_cox_csv", "Exportar Tabela de Hazard Ratios (CSV)", class = "btn btn-outline-secondary")
           )
         )
       )
