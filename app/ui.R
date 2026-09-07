@@ -28,14 +28,48 @@ ui <- bslib::page_navbar(
       "Customer Churn Survival Analytics"
     )
   ),
-  fillable = TRUE,
+  fillable = FALSE,
   
   # Injeção de CSS de Alta Fidelidade (Custom Design System)
   header = shiny::tags$head(
     shiny::tags$style(shiny::HTML("
       /* Background Global & Scrollbar */
-      body {
+      html, body {
         background-color: #070b14 !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+      }
+      .bslib-page-fill {
+        height: auto !important;
+        min-height: 100vh !important;
+      }
+      .bslib-sidebar-layout {
+        height: auto !important;
+        min-height: calc(100vh - 65px) !important;
+      }
+      .bslib-sidebar-layout > .main {
+        height: auto !important;
+        min-height: 100% !important;
+        overflow-y: visible !important;
+        overflow-x: hidden !important;
+        padding-bottom: 90px !important;
+      }
+      .bslib-sidebar-layout > .sidebar {
+        position: sticky !important;
+        top: 65px !important;
+        max-height: calc(100vh - 65px) !important;
+        overflow-y: auto !important;
+      }
+      .tab-content, .tab-pane {
+        height: auto !important;
+        overflow: visible !important;
+      }
+      .html-fill-container, .html-fill-item {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
       }
       ::-webkit-scrollbar {
         width: 8px;
