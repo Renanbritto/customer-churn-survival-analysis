@@ -1,6 +1,13 @@
 # Script de Execução da Suíte de Testes Unitários
-if (!"testthat" %in% installed.packages()[, "Package"]) {
-  install.packages("testthat", repos = "https://cloud.r-project.org")
+user_lib <- Sys.getenv("R_LIBS_USER")
+if (!dir.exists(user_lib)) {
+  dir.create(user_lib, recursive = TRUE, showWarnings = FALSE)
+}
+.libPaths(c(user_lib, .libPaths()))
+
+installed <- installed.packages(lib.loc = .libPaths())[, "Package"]
+if (!"testthat" %in% installed) {
+  install.packages("testthat", lib = user_lib, repos = "https://cloud.r-project.org")
 }
 
 library(testthat)
