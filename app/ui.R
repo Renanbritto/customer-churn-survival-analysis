@@ -1,5 +1,5 @@
 # ==============================================================================
-# R Shiny Application - User Interface (UI)
+# R Shiny Application - User Interface (UI) - Redesign Executivo Premium
 # Customer Churn Survival Analysis & LTV Modeling
 # ==============================================================================
 
@@ -12,24 +12,225 @@ theme_executive <- bslib::bs_theme(
   info = "#06b6d4",
   warning = "#f59e0b",
   danger = "#ef4444",
-  bg = "#0b0f19",
-  fg = "#f8fafc",
+  bg = "#070b14",
+  fg = "#f1f5f9",
   base_font = bslib::font_google("Inter"),
-  heading_font = bslib::font_google("Inter")
+  heading_font = bslib::font_google("Outfit")
 )
 
 ui <- bslib::page_navbar(
   theme = theme_executive,
-  title = "⏱️ Customer Churn Survival Analysis",
+  title = shiny::div(
+    style = "display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem;",
+    
+    shiny::tags$span(
+      style = "background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;",
+      "Customer Churn Survival Analytics"
+    )
+  ),
   fillable = TRUE,
+  
+  # Injeção de CSS de Alta Fidelidade (Custom Design System)
+  header = shiny::tags$head(
+    shiny::tags$style(shiny::HTML("
+      /* Background Global & Scrollbar */
+      body {
+        background-color: #070b14 !important;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0b1120;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #334155;
+      }
+
+      /* Navbar Moderna */
+      .navbar {
+        background: rgba(11, 17, 32, 0.85) !important;
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 12px 24px !important;
+      }
+      .nav-link {
+        font-weight: 500 !important;
+        font-size: 0.95rem !important;
+        color: #94a3b8 !important;
+        transition: all 0.2s ease-in-out !important;
+        border-radius: 8px !important;
+        margin: 0 4px !important;
+        padding: 8px 16px !important;
+      }
+      .nav-link:hover {
+        color: #f8fafc !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+      }
+      .nav-link.active {
+        color: #38bdf8 !important;
+        background: rgba(56, 189, 248, 0.12) !important;
+        border-bottom: 2px solid #38bdf8 !important;
+        font-weight: 600 !important;
+      }
+
+      /* Cards Executivos de KPIs (Substituindo o value_box padrão quebrado) */
+      .kpi-card {
+        background: linear-gradient(145deg, #111827 0%, #0b0f19 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 20px 22px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .kpi-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(56, 189, 248, 0.3);
+      }
+      .kpi-card-glow-blue { border-top: 3px solid #38bdf8; }
+      .kpi-card-glow-red { border-top: 3px solid #ef4444; }
+      .kpi-card-glow-green { border-top: 3px solid #10b981; }
+      .kpi-card-glow-amber { border-top: 3px solid #f59e0b; }
+
+      .kpi-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .kpi-value {
+        font-size: 1.85rem;
+        font-weight: 800;
+        color: #f8fafc;
+        margin-top: 8px;
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+      .kpi-subtext {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #64748b;
+      }
+      .kpi-icon-badge {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+      }
+
+      /* Cards de Conteúdo e Gráficos */
+      .card {
+        background: #0d1322 !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 14px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35) !important;
+        overflow: hidden !important;
+      }
+      .card-header {
+        background: rgba(17, 24, 39, 0.6) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+        color: #e2e8f0 !important;
+        padding: 14px 20px !important;
+      }
+      .card-footer {
+        background: rgba(15, 23, 42, 0.4) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+        font-size: 0.82rem !important;
+        color: #94a3b8 !important;
+        padding: 10px 18px !important;
+      }
+
+      /* Sidebar Customizada */
+      .bslib-sidebar-layout > .sidebar {
+        background: #090e1a !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 20px 18px !important;
+      }
+      .sidebar-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #38bdf8;
+        margin-bottom: 4px;
+      }
+
+      /* Tabelas DT Dark */
+      table.dataTable {
+        background-color: transparent !important;
+        color: #cbd5e1 !important;
+        font-size: 0.88rem !important;
+      }
+      table.dataTable thead th {
+        background-color: #111827 !important;
+        color: #94a3b8 !important;
+        border-bottom: 1px solid #1e293b !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        font-size: 0.76rem !important;
+        letter-spacing: 0.05em !important;
+      }
+      table.dataTable tbody tr {
+        background-color: transparent !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+      }
+      table.dataTable tbody tr:hover {
+        background-color: rgba(56, 189, 248, 0.05) !important;
+      }
+
+      /* Badges */
+      .badge-custom {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+      .badge-risk {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+      .badge-protect {
+        background: rgba(16, 185, 129, 0.15);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      .badge-neutral {
+        background: rgba(148, 163, 184, 0.15);
+        color: #94a3b8;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+      }
+    "))
+  ),
   
   # Sidebar com Perfil de Simulação What-If
   sidebar = bslib::sidebar(
-    title = "🎛️ Perfil do Cliente (Simulador)",
-    width = 330,
+    title = shiny::div(
+      class = "sidebar-title",
+      "Perfil do Cliente"
+    ),
+    width = 320,
     open = "open",
     
-    shiny::helpText("Defina as características do cliente para estimar sua sobrevida e LTV residual."),
+    shiny::tags$p(
+      style = "font-size: 0.85rem; color: #94a3b8; margin-bottom: 16px;",
+      "Altere as variáveis para prever a curva de sobrevida individual e o LTV residual."
+    ),
     
     shiny::selectInput(
       inputId = "sim_contract",
@@ -50,7 +251,7 @@ ui <- bslib::page_navbar(
     
     shiny::sliderInput(
       inputId = "sim_tickets",
-      label = "Chamados no Suporte Técnico:",
+      label = "Chamados no Suporte:",
       min = 0,
       max = 10,
       value = 2,
@@ -78,7 +279,8 @@ ui <- bslib::page_navbar(
       selected = "No"
     ),
     
-    shiny::hr(),
+    shiny::hr(style = "border-color: rgba(255, 255, 255, 0.08);"),
+    
     shiny::sliderInput(
       inputId = "sim_horizon",
       label = "Horizonte de Projeção (Meses):",
@@ -88,56 +290,91 @@ ui <- bslib::page_navbar(
       step = 6
     ),
     
-    shiny::helpText("Modelagem com Riscos Proporcionais de Cox e desconto intertemporal a 0.8% ao mês.")
+    shiny::tags$div(
+      style = "background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 10px 12px; font-size: 0.8rem; color: #94a3b8;",
+      shiny::tags$b("Metodologia:"), " Riscos Proporcionais de Cox com taxa de desconto intertemporal de 0.8% a.m."
+    )
   ),
   
-  # Aba 1: Kaplan-Meier
+  # ============================================================================
+  # ABA 1: KAPLAN-MEIER & RETENÇÃO
+  # ============================================================================
   bslib::nav_panel(
-    title = "📈 Kaplan-Meier & Retenção",
-    bslib::layout_column_wrap(
-      width = 1/4,
-      bslib::value_box(
-        title = "Total de Clientes Monitorados",
-        value = textOutput("kpi_total_customers"),
-        showcase = shiny::icon("users"),
-        theme = "primary"
+    title = "Kaplan-Meier & Retenção",
+    
+    # 4 Cards Executivos com Layout Elegante
+    shiny::fluidRow(
+      shiny::column(
+        width = 3,
+        shiny::div(
+          class = "kpi-card kpi-card-glow-blue",
+          shiny::div(
+            class = "kpi-label",
+            "Base Monitorada"),
+          shiny::div(class = "kpi-value", shiny::textOutput("kpi_total_customers")),
+          shiny::div(class = "kpi-subtext", "Total de clientes sob observação")
+        )
       ),
-      bslib::value_box(
-        title = "Cancelamentos Ocorridos (Churn)",
-        value = textOutput("kpi_churn_count"),
-        showcase = shiny::icon("user-xmark"),
-        theme = "danger"
+      shiny::column(
+        width = 3,
+        shiny::div(
+          class = "kpi-card kpi-card-glow-red",
+          shiny::div(
+            class = "kpi-label",
+            "Eventos de Churn"),
+          shiny::div(class = "kpi-value", shiny::textOutput("kpi_churn_count")),
+          shiny::div(class = "kpi-subtext", shiny::textOutput("kpi_churn_pct"))
+        )
       ),
-      bslib::value_box(
-        title = "Clientes Ativos (Censurados)",
-        value = textOutput("kpi_censored_count"),
-        showcase = shiny::icon("shield-heart"),
-        theme = "success"
+      shiny::column(
+        width = 3,
+        shiny::div(
+          class = "kpi-card kpi-card-glow-green",
+          shiny::div(
+            class = "kpi-label",
+            "Clientes Ativos (Censurados)"),
+          shiny::div(class = "kpi-value", shiny::textOutput("kpi_censored_count")),
+          shiny::div(class = "kpi-subtext", shiny::textOutput("kpi_censored_pct"))
+        )
       ),
-      bslib::value_box(
-        title = "Mediana de Sobrevivência Geral",
-        value = textOutput("kpi_median_tenure"),
-        showcase = shiny::icon("calendar-days"),
-        theme = "info"
+      shiny::column(
+        width = 3,
+        shiny::div(
+          class = "kpi-card kpi-card-glow-amber",
+          shiny::div(
+            class = "kpi-label",
+            "Mediana de Sobrevivência"),
+          shiny::div(class = "kpi-value", shiny::textOutput("kpi_median_tenure")),
+          shiny::div(class = "kpi-subtext", "Tempo em que 50% ainda retém")
+        )
       )
     ),
     
     shiny::br(),
     
-    bslib::layout_column_wrap(
-      width = 1/2,
-      bslib::card(
-        bslib::card_header("Curva Global de Sobrevivência S(t) de Kaplan-Meier"),
-        plotly::plotlyOutput("plot_km_global", height = "380px")
+    # Linha com Gráficos Kaplan-Meier
+    shiny::fluidRow(
+      shiny::column(
+        width = 6,
+        bslib::card(
+          bslib::card_header("Curva Global de Sobrevivência S(t) de Kaplan-Meier"),
+          plotly::plotlyOutput("plot_km_global", height = "370px"),
+          bslib::card_footer("Faixa sombreada representa o Intervalo de Confiança assintótico de 95%.")
+        )
       ),
-      bslib::card(
-        bslib::card_header("Curvas Estratificadas por Tipo de Contrato (Log-Rank Test)"),
-        plotly::plotlyOutput("plot_km_stratified", height = "380px")
+      shiny::column(
+        width = 6,
+        bslib::card(
+          bslib::card_header("Curvas Estratificadas por Tipo de Contrato (Log-Rank Test)"),
+          plotly::plotlyOutput("plot_km_stratified", height = "370px"),
+          bslib::card_footer("Contratos anuais e bianuais atuam como forte barreira à evasão precoce.")
+        )
       )
     ),
     
     shiny::br(),
     
+    # Marcos Temporais e Diagnóstico
     bslib::card(
       bslib::card_header("Marcos Temporais de Retenção e Diagnóstico de Log-Rank"),
       shiny::fluidRow(
@@ -148,8 +385,8 @@ ui <- bslib::page_navbar(
         shiny::column(
           width = 5,
           shiny::div(
-            class = "p-3 rounded border border-secondary",
-            shiny::h5("⚖️ Diagnóstico do Teste de Log-Rank"),
+            style = "background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 18px;",
+            shiny::h5(style = "color: #38bdf8; font-weight: 700; margin-bottom: 14px;", "Diagnóstico do Teste de Log-Rank"),
             shiny::uiOutput("logrank_diagnostic_ui")
           )
         )
@@ -157,37 +394,45 @@ ui <- bslib::page_navbar(
     )
   ),
   
-  # Aba 2: Modelo de Cox & Hazard Ratios
+  # ============================================================================
+  # ABA 2: MODELO DE COX & HAZARD RATIOS
+  # ============================================================================
   bslib::nav_panel(
-    title = "⚖️ Modelo de Cox & Hazard Ratios",
-    bslib::layout_column_wrap(
-      width = 1/2,
-      bslib::card(
-        bslib::card_header("Forest Plot: Hazard Ratios (HR) com Intervalo de Confiança de 95%"),
-        plotly::plotlyOutput("plot_forest_hr", height = "420px"),
-        shiny::card_footer("HR > 1 indica aceleração do cancelamento; HR < 1 indica proteção e retenção.")
+    title = "Modelo de Cox & Hazard Ratios",
+    
+    shiny::fluidRow(
+      shiny::column(
+        width = 6,
+        bslib::card(
+          bslib::card_header("Forest Plot: Hazard Ratios (HR) com Intervalos de Confiança (95%)"),
+          plotly::plotlyOutput("plot_forest_hr", height = "430px"),
+          bslib::card_footer("HR > 1 indica risco aumentado de churn; HR < 1 indica fator de proteção/retenção.")
+        )
       ),
-      bslib::card(
-        bslib::card_header("Tabela de Coeficientes e Significância Estatística"),
-        DT::dataTableOutput("table_cox_summary"),
-        shiny::card_footer("Estimativas obtidas por Mxima Verossimilhança Parcial (Partial Likelihood).")
+      shiny::column(
+        width = 6,
+        bslib::card(
+          bslib::card_header("Tabela de Coeficientes e Significância Estatística"),
+          DT::dataTableOutput("table_cox_summary"),
+          bslib::card_footer("Estimativas ajustadas por Mxima Verossimilhança Parcial de Cox.")
+        )
       )
     ),
     
     shiny::br(),
     
     bslib::card(
-      bslib::card_header("Diagnóstico da Premissa de Riscos Proporcionais (Resíduos de Schoenfeld)"),
+      bslib::card_header("Diagnóstico de Riscos Proporcionais (Resíduos de Schoenfeld)"),
       shiny::fluidRow(
         shiny::column(
-          width = 8,
+          width = 7,
           DT::dataTableOutput("table_schoenfeld")
         ),
         shiny::column(
-          width = 4,
+          width = 5,
           shiny::div(
-            class = "p-3 rounded border border-secondary",
-            shiny::h5("🔬 Interpretação Metodológica"),
+            style = "background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 18px;",
+            shiny::h5(style = "color: #818cf8; font-weight: 700; margin-bottom: 12px;", "Avaliação Metodológica"),
             shiny::uiOutput("schoenfeld_diagnostic_ui")
           )
         )
@@ -195,68 +440,88 @@ ui <- bslib::page_navbar(
     )
   ),
   
-  # Aba 3: Simulador What-If & LTV
+  # ============================================================================
+  # ABA 3: SIMULADOR WHAT-IF & LTV
+  # ============================================================================
   bslib::nav_panel(
-    title = "🎛️ Simulador What-If & LTV",
-    bslib::layout_column_wrap(
-      width = 1/3,
-      bslib::value_box(
-        title = "Expectativa de Sobrevida Residual",
-        value = textOutput("kpi_sim_lifetime"),
-        showcase = shiny::icon("clock"),
-        theme = "primary"
+    title = "Simulador What-If & LTV",
+    
+    shiny::fluidRow(
+      shiny::column(
+        width = 4,
+        shiny::div(
+          class = "kpi-card kpi-card-glow-blue",
+          shiny::div(class = "kpi-label", "Sobrevida Média Esperada"),
+          shiny::div(class = "kpi-value", shiny::textOutput("kpi_sim_lifetime")),
+          shiny::div(class = "kpi-subtext", "Meses projetados de vida útil")
+        )
       ),
-      bslib::value_box(
-        title = "Retenção em 12 Meses P(T > 12)",
-        value = textOutput("kpi_sim_prob12"),
-        showcase = shiny::icon("percent"),
-        theme = "success"
+      shiny::column(
+        width = 4,
+        shiny::div(
+          class = "kpi-card kpi-card-glow-green",
+          shiny::div(class = "kpi-label", "Retenção em 12 Meses"),
+          shiny::div(class = "kpi-value", shiny::textOutput("kpi_sim_prob12")),
+          shiny::div(class = "kpi-subtext", "Probabilidade acumulada P(T > 12)")
+        )
       ),
-      bslib::value_box(
-        title = "LTV Residual Descontado Projetado",
-        value = textOutput("kpi_sim_ltv"),
-        showcase = shiny::icon("money-bill-trend-up"),
-        theme = "warning"
+      shiny::column(
+        width = 4,
+        shiny::div(
+          class = "kpi-card kpi-card-glow-amber",
+          shiny::div(class = "kpi-label", "LTV Residual Descontado"),
+          shiny::div(class = "kpi-value", shiny::textOutput("kpi_sim_ltv")),
+          shiny::div(class = "kpi-subtext", "Valor presente líquido da receita futura")
+        )
       )
     ),
     
     shiny::br(),
     
-    bslib::layout_column_wrap(
-      width = 1/2,
-      bslib::card(
-        bslib::card_header("Curva Individual de Sobrevivência Projetada S(t | Perfil)"),
-        plotly::plotlyOutput("plot_sim_curve", height = "380px")
+    shiny::fluidRow(
+      shiny::column(
+        width = 6,
+        bslib::card(
+          bslib::card_header("Curva Individualizada de Sobrevivência S(t | Perfil Simulado)"),
+          plotly::plotlyOutput("plot_sim_curve", height = "370px"),
+          bslib::card_footer("Projeção condicional ao perfil selecionado nos controles laterais.")
+        )
       ),
-      bslib::card(
-        bslib::card_header("Cronograma de Fluxo de Caixa Esperado Descontado Mês a Mês"),
-        plotly::plotlyOutput("plot_sim_cashflow", height = "380px")
+      shiny::column(
+        width = 6,
+        bslib::card(
+          bslib::card_header("Cronograma de Fluxo de Caixa Esperado Mês a Mês (R$)"),
+          plotly::plotlyOutput("plot_sim_cashflow", height = "370px"),
+          bslib::card_footer("Barras = Fluxo Descontado a 0.8% a.m.; Linha = Receita Nominal Esperada.")
+        )
       )
     ),
     
     shiny::br(),
     
     bslib::card(
-      bslib::card_header("Recomendação Tática do Comitê de Retenção"),
+      bslib::card_header("Plano de Ação Tático para Retenção & CS"),
       shiny::uiOutput("retention_recommendation_ui")
     )
   ),
   
-  # Aba 4: Base de Dados & Exportação
+  # ============================================================================
+  # ABA 4: BASE DE DADOS & EXPORTAÇÃO
+  # ============================================================================
   bslib::nav_panel(
-    title = "📊 Base de Dados & Exportação",
+    title = "Base de Dados & Exportação",
     bslib::card(
-      bslib::card_header("Histórico Censurado de Clientes (2.500 Observações)"),
+      bslib::card_header("Base de Dados Completa (2.500 Clientes)"),
       DT::dataTableOutput("table_raw_data"),
-      shiny::card_footer(
+      bslib::card_footer(
         shiny::fluidRow(
           shiny::column(
             width = 6,
-            shiny::downloadButton("download_raw_csv", "📥 Baixar Base de Dados (CSV)", class = "btn-outline-primary")
+            shiny::downloadButton("download_raw_csv", "Exportar Base Completa (CSV)", class = "btn btn-outline-info")
           ),
           shiny::column(
             width = 6,
-            shiny::downloadButton("download_cox_csv", "📥 Baixar Tabela de Hazard Ratios (CSV)", class = "btn-outline-secondary")
+            shiny::downloadButton("download_cox_csv", "Exportar Tabela de Hazard Ratios (CSV)", class = "btn btn-outline-secondary")
           )
         )
       )
