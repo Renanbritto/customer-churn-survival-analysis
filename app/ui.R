@@ -165,12 +165,12 @@ ui <- bslib::page_navbar(
       bslib::card(
         bslib::card_header("Forest Plot: Hazard Ratios (HR) com Intervalo de Confiança de 95%"),
         plotly::plotlyOutput("plot_forest_hr", height = "420px"),
-        shiny::card_footer("HR > 1 indica aceleração do cancelamento; HR < 1 indica proteção e retenção.")
+        bslib::card_footer("HR > 1 indica aceleração do cancelamento; HR < 1 indica proteção e retenção.")
       ),
       bslib::card(
         bslib::card_header("Tabela de Coeficientes e Significância Estatística"),
         DT::dataTableOutput("table_cox_summary"),
-        shiny::card_footer("Estimativas obtidas por Mxima Verossimilhança Parcial (Partial Likelihood).")
+        bslib::card_footer("Estimativas obtidas por Mxima Verossimilhança Parcial (Partial Likelihood).")
       )
     ),
     
@@ -248,7 +248,7 @@ ui <- bslib::page_navbar(
     bslib::card(
       bslib::card_header("Histórico Censurado de Clientes (2.500 Observações)"),
       DT::dataTableOutput("table_raw_data"),
-      shiny::card_footer(
+      bslib::card_footer(
         shiny::fluidRow(
           shiny::column(
             width = 6,
